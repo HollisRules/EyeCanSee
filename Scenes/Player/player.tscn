@@ -38,7 +38,7 @@ rings = 4
 
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("orientation_node")]
 script = ExtResource("1_4p6vc")
-orientation_node = NodePath("")
+orientation_node = NodePath("HeadPOS")
 
 [node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)

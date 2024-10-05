@@ -78,3 +78,12 @@ LookLeft={
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_render/layer_1="PlayerSees"
+3d_render/layer_2="MonsterSees"
+3d_physics/layer_1="Level"
+3d_physics/layer_2="Objects"
+3d_physics/layer_3="Player"
+3d_physics/layer_4="Monster"

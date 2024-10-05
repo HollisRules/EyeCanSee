@@ -27,7 +27,9 @@ pixel_size = 0.0008
 billboard = 2
 texture = ExtResource("2_4sah7")
 
-[node name="SightRay" type="RayCast3D" parent="."]
-target_position = Vector3(500, 0, 0)
-
 [node name="HeadPOS" parent="." instance=ExtResource("3_jseoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68876, 0)
+
+[node name="SightRay" type="RayCast3D" parent="HeadPOS"]
+target_position = Vector3(0, 0, 0)
+hit_back_faces = false
