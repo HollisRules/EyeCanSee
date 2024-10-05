@@ -1,11 +1,11 @@
-extends "res://Scenes/CharacterBody/character_body.gd"
+extends RigidCharacterBody3D
+class_name Player
 
+##Max Turn rate in degrees per second
+@export var TurnRate : float = 2
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func process_character_input(delta : float):
+	input_direction = Input.get_vector("Left","Right","Back","Forward")
+	var look_mod : Vector2 = Input.get_vector("LookLeft","LookRight","LookDown","LookUp")
+	$HeadPOS.rotate_y(-look_mod.x * TurnRate * delta)
+	$TestMesh.rotation.y = $HeadPOS.rotation.y

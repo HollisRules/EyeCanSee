@@ -76,12 +76,24 @@ extends RigidBody3D
 ##Goal Velocity
 var GoalVelocity : Vector3 = Vector3.ZERO
 
+func _ready():
+	# Set up body
+	axis_lock_angular_x = true
+	axis_lock_angular_y = true
+	axis_lock_angular_z = true
+	contact_monitor = true
+	max_contacts_reported = 16
+	continuous_cd = true
+
 ##Physics process func
 func _physics_process(delta: float) -> void:
-	if IsOnFloor():
-		ApplyFloorForce()
-		DampWrongVelocity()
+	pass
 	
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if IsOnFloor():
+		ApplyFloorForce(state)
+		DampWrongVelocity()
 
 ##Updates Collider Shape
 func UpdateCollider() -> void:
@@ -152,17 +164,16 @@ func DampWrongVelocity() -> void:
 	pass
 
 ##Apply Floor Cast Forces (Only Apply if is on floor)
-func ApplyFloorForce() -> void:
+func ApplyFloorForce(state: PhysicsDirectBodyState3D) -> void:
 	var DisToClear : float = (
-		Clearance - (FloorCast.global_position.distance_to(GetFloorPosition())))
+		max(0, Clearance - (FloorCast.global_position.distance_to(GetFloorPosition()) -.1 )))
 	
 	var force : Vector3 = Vector3(
 		0,
-		max((9.8 * mass), (9.8 * mass) + DisToClear * Stiffness),
-		0
-	)
+		max(-state.get_total_gravity().y * mass, DisToClear * Stiffness * mass),
+		0)
 	
-	print(force)
+	print(-state.get_total_gravity().y * mass)
 	
 	apply_central_force(force)
 	var FloorObject : Object = GetFloor()

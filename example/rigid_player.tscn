@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://uwjofkm4iyb2"]
 
-[ext_resource type="Script" path="res://addons/rigid_character_body_3d/example/rigid_player.gd" id="1_ab1qo"]
+[ext_resource type="Script" path="res://example/rigid_player.gd" id="1_ab1qo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3ggag"]
 
@@ -35,6 +35,13 @@ physics_material_override = SubResource("PhysicsMaterial_3ggag")
 gravity_scale = 0.0
 script = ExtResource("1_ab1qo")
 orientation_node = NodePath("Camera3D")
+gravity = null
+jump_force = null
+walk_force = null
+run_force = null
+air_force = null
+drag_force = null
+fluid_density = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

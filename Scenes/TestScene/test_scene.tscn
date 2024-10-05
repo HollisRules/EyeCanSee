@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx2dokrj70cqi"]
+[gd_scene load_steps=12 format=3 uid="uid://dx2dokrj70cqi"]
 
-[ext_resource type="PackedScene" uid="uid://d38tokv8xjspi" path="res://Scenes/CharacterBody/character_body.tscn" id="1_sqxv1"]
+[ext_resource type="PackedScene" uid="uid://2c5auuu6qdrs" path="res://Scenes/Player/Player.tscn" id="1_w8mde"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s75or"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,11 +15,21 @@ sky = SubResource("Sky_31a7r")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s4whl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_me4ep"]
+noise = SubResource("FastNoiseLite_s4whl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af6oe"]
+albedo_texture = SubResource("NoiseTexture2D_me4ep")
+uv1_triplanar = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_xc5rj"]
-size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_af6oe")
+size = Vector3(5000, 1, 5000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ysa63"]
-size = Vector3(50, 1, 50)
+size = Vector3(5000, 1, 5000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j58df"]
 size = Vector3(3, 3, 3)
@@ -42,11 +52,6 @@ mesh = SubResource("BoxMesh_xc5rj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ysa63")
 
-[node name="CharacterBody" parent="." instance=ExtResource("1_sqxv1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.4852, 0)
-JumpForce = 50.0
-Stiffness = 50.0
-
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.69118, 0)
 
@@ -55,3 +60,8 @@ shape = SubResource("BoxShape3D_j58df")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_feluw")
+
+[node name="Player" parent="." instance=ExtResource("1_w8mde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.9038, 0)
+walk_force = 30.0
+run_force = 40.0

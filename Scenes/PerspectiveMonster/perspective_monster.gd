@@ -1,11 +1,14 @@
-extends "res://Scenes/CharacterBody/character_body.gd"
+extends RigidCharacterBody3D
 
+##Ref To Player
+@export var playerRef : RigidCharacterBody3D = null
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+##Ref To Main Scene
+@export var mainScene : 
 
+##Ref to sight ray
+@onready var SightRay : RayCast3D = $SightRay
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	super(delta)
+	SightRay.target_position = SightRay.to_local(playerRef.global_position)

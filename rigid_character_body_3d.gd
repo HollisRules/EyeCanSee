@@ -69,13 +69,13 @@ func _ready():
 	continuous_cd = true
 	
 	# Capture mouse
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _physics_process(delta):
 	_process_state()
 	
-	process_character_input()
+	process_character_input(delta)
 	
 	apply_movement(delta)
 	
@@ -132,7 +132,6 @@ func apply_movement(delta: float):
 			apply_central_impulse(new_norma * jump_force)
 	if Input.is_action_just_pressed("run") and is_on_floor:
 		is_running = true
-	
 	var forward = floor_normal.cross(orientation_node.global_basis.x)
 	var right = forward.cross(floor_normal)
 	var dir = ((forward * input_direction.y) + (right * input_direction.x)).normalized()
@@ -143,7 +142,7 @@ func apply_movement(delta: float):
 		is_running = false
 
 
-func process_character_input():
+func process_character_input(delta : float):
 	pass
 
 
