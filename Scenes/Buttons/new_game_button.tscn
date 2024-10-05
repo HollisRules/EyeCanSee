@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d21kcnmish28g"]
+
+[ext_resource type="Script" path="res://Scenes/Buttons/new_game_button.gd" id="1_7os4c"]
+
+[node name="NewGameButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_7os4c")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

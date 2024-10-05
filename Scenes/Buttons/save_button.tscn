@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgyxt4j4h57pn"]
+
+[ext_resource type="Script" path="res://Scenes/Buttons/save_button.gd" id="1_5xtki"]
+
+[node name="SaveButton" type="Button"]
+size_flags_vertical = 3
+text = "Save Game"
+script = ExtResource("1_5xtki")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

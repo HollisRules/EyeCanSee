@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvrya2gkul5g0"]
+
+[ext_resource type="Script" path="res://Scenes/Buttons/exit_button.gd" id="1_u6373"]
+
+[node name="ExitButton" type="Button"]
+size_flags_vertical = 3
+text = "Exit"
+script = ExtResource("1_u6373")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx2pb73woxim2"]
+
+[ext_resource type="Script" path="res://Scenes/Pause/pause_menu.gd" id="1_5r4kn"]
+[ext_resource type="PackedScene" uid="uid://bgyxt4j4h57pn" path="res://Scenes/Buttons/save_button.tscn" id="2_sugbu"]
+[ext_resource type="PackedScene" uid="uid://i3qjqowaq365" path="res://Scenes/Buttons/load_button.tscn" id="3_aj2wt"]
+[ext_resource type="PackedScene" uid="uid://cvrya2gkul5g0" path="res://Scenes/Buttons/exit_button.tscn" id="4_gc4ur"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5r4kn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveButton" parent="VBoxContainer" instance=ExtResource("2_sugbu")]
+layout_mode = 2
+
+[node name="LoadButton" parent="VBoxContainer" instance=ExtResource("3_aj2wt")]
+layout_mode = 2
+
+[node name="ExitButton" parent="VBoxContainer" instance=ExtResource("4_gc4ur")]
+layout_mode = 2

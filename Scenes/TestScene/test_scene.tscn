@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://dx2dokrj70cqi"]
+
+[ext_resource type="PackedScene" uid="uid://d38tokv8xjspi" path="res://Scenes/CharacterBody/character_body.tscn" id="1_sqxv1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s75or"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_31a7r"]
+sky_material = SubResource("ProceduralSkyMaterial_s75or")
+
+[sub_resource type="Environment" id="Environment_wbjky"]
+background_mode = 2
+sky = SubResource("Sky_31a7r")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_xc5rj"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ysa63"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j58df"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_feluw"]
+size = Vector3(3, 3, 3)
+
+[node name="TestScene" type="StaticBody3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wbjky")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_xc5rj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ysa63")
+
+[node name="CharacterBody" parent="." instance=ExtResource("1_sqxv1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.4852, 0)
+JumpForce = 50.0
+Stiffness = 50.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.69118, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_j58df")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_feluw")
