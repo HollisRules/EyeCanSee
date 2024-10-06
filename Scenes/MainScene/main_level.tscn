@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://di3qsuf7euu5"]
+[gd_scene load_steps=17 format=3 uid="uid://di3qsuf7euu5"]
 
 [ext_resource type="PackedScene" uid="uid://evr7qe017njt" path="res://Scenes/MainScene/main_scene.tscn" id="1_tnxgj"]
 [ext_resource type="PackedScene" uid="uid://by0kj2l4nj7o8" path="res://Scenes/PerspectiveMonster/perspective_monster.tscn" id="2_2kgns"]
@@ -27,6 +27,10 @@ tonemap_mode = 2
 glow_enabled = true
 glow_blend_mode = 0
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o0hdb"]
+friction = 2.0
+rough = true
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_p71v7"]
 size = Vector3(7.23749, 6.33398, 5.84225)
 
@@ -46,21 +50,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10463, 0.744313, 10.8241)
 mass = 25.0
 playerRef = NodePath("../Player")
 mainScene = NodePath("..")
-walk_force = 250.0
+walk_force = 300.0
 air_force = 250.0
-drag_force = 0.75
 
 [node name="Player" parent="." index="3" instance=ExtResource("3_lnc5a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.20761, 1.44377, 2.52111)
 mass = 60.0
+physics_material_override = SubResource("PhysicsMaterial_o0hdb")
 TurnRate = 20.0
 ObjectForceMult = 500.0
 ObjectDampMult = 30.0
 jump_force = 350.0
-walk_force = 900.0
-run_force = 1000.0
+walk_force = 1500.0
+run_force = 2000.0
 air_force = 100.0
-drag_force = 1.0
 
 [node name="CSG" parent="." index="4" instance=ExtResource("4_niw2c")]
 

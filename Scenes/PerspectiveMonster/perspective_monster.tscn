@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://boe43dst24dsw" path="res://Sounds/HeartBeatLoop.wav" id="3_3jogs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mgob5"]
-friction = 0.0
+friction = 0.75
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtuys"]
 radius = 0.3

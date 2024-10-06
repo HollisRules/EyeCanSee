@@ -84,4 +84,4 @@ func _on_perspective_monster_killed_player() -> void:
 
 
 func _on_win_box_body_entered(body: Node3D) -> void:
-	get_tree().change_scene_to_file("res://Scenes/DeathScene/death_scene.tscn")
+	get_tree().change_scene_to_file("res://Scenes/WinScene/win_scene.tscn")
