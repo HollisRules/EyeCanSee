@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://0lbeb045guj0"]
+
+[ext_resource type="FontFile" uid="uid://q1vbmciv7j6g" path="res://Font/impact.ttf" id="1_3bk4d"]
+[ext_resource type="Texture2D" uid="uid://cneq7uldeatxi" path="res://Textures/9_patch.png" id="2_upt50"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmq6u"]
+albedo_texture = ExtResource("2_upt50")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ixk78"]
+size = Vector3(0.56, 0.3, 0.065)
+
+[node name="Exit Sign" type="Node3D"]
+
+[node name="Label3D" type="Label3D" parent="."]
+modulate = Color(0.371354, 1, 0.446282, 1)
+text = "EXIT"
+font = ExtResource("1_3bk4d")
+font_size = 100
+outline_size = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.845, 0, 0, 0, 1.845, 0, 0, 0, 1.845, 0.00149447, 0.00150666, -0.0669894)
+material_override = SubResource("StandardMaterial3D_gmq6u")
+mesh = SubResource("BoxMesh_ixk78")

@@ -1,13 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnw3bjufbnl5l"]
+[gd_scene load_steps=11 format=3 uid="uid://bnw3bjufbnl5l"]
 
 [ext_resource type="Script" path="res://Assets/KeyCardReader/key_card_reader.gd" id="1_agylc"]
 [ext_resource type="AudioStream" uid="uid://d30ou2123qx6n" path="res://Sounds/beep.wav" id="2_4q8e5"]
+[ext_resource type="Texture2D" uid="uid://bgkpbvdjjm45x" path="res://Textures/Keycard_Reader.png" id="2_mb3hp"]
+[ext_resource type="FontFile" uid="uid://q1vbmciv7j6g" path="res://Font/impact.ttf" id="4_ti52d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5cuew"]
 size = Vector3(0.5, 0.5, 0.2901)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vy4qj"]
+albedo_texture = ExtResource("2_mb3hp")
+uv1_scale = Vector3(2, 2.5, 2.5)
+uv1_offset = Vector3(-0.5, -0.48, 0)
+uv1_triplanar = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_kg22j"]
-size = Vector3(0.1, 0.2, 0.05)
+material = SubResource("StandardMaterial3D_vy4qj")
+size = Vector3(0.505, 0.415, 0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jg5bm"]
 albedo_color = Color(1, 0, 0, 1)
@@ -18,6 +27,12 @@ emission_energy_multiplier = 2.0
 [sub_resource type="SphereMesh" id="SphereMesh_50oxu"]
 radius = 0.025
 height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f6b2h"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 2.0
 
 [node name="KeyCardReader" type="Area3D"]
 collision_layer = 16
@@ -32,8 +47,13 @@ shape = SubResource("BoxShape3D_5cuew")
 mesh = SubResource("BoxMesh_kg22j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10758, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.114554, 0.0680496, 0.0213355)
 material_override = SubResource("StandardMaterial3D_jg5bm")
+mesh = SubResource("SphereMesh_50oxu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.178829, 0.0680496, 0.0213355)
+material_override = SubResource("StandardMaterial3D_f6b2h")
 mesh = SubResource("SphereMesh_50oxu")
 
 [node name="BeepAudio" type="AudioStreamPlayer3D" parent="."]
@@ -41,3 +61,14 @@ stream = ExtResource("2_4q8e5")
 volume_db = -27.018
 max_db = 1.0
 pitch_scale = 1.49
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0920345, 0.0427658, 0.0264969)
+pixel_size = 0.001
+shaded = true
+modulate = Color(0, 0, 0, 1)
+text = "Security
+Panel"
+font = ExtResource("4_ti52d")
+font_size = 50
+outline_size = 0

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cdbtyntho154x"]
+
+[node name="LightBulb" type="OmniLight3D"]
+omni_range = 10.0

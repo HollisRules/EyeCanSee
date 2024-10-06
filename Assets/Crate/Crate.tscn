@@ -60,7 +60,6 @@ size = Vector2(1, 1)
 [node name="Crate" type="RigidBody3D"]
 collision_layer = 16
 collision_mask = 63
-mass = 20.0
 continuous_cd = true
 script = ExtResource("1_pmrg5")
 

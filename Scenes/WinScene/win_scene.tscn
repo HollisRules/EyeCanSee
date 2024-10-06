@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bipakjmd2lnsq"]
+[gd_scene load_steps=27 format=3 uid="uid://bipakjmd2lnsq"]
 
 [ext_resource type="PackedScene" uid="uid://dip20yxcibvjv" path="res://Scenes/WinScene/Win_Animation_Main_Character_Model.fbx" id="1_je2xn"]
 [ext_resource type="Script" path="res://Scenes/WinScene/win_scene.gd" id="1_q8y0f"]
@@ -7,11 +7,16 @@
 [ext_resource type="Material" uid="uid://du1ho2d7owh8o" path="res://GAMEHAM STUFF/Materials/Concrete.tres" id="3_joj2b"]
 [ext_resource type="AudioStream" uid="uid://mbfyfna4owt" path="res://Sounds/metal-pipe-230698.mp3" id="5_cgv3c"]
 [ext_resource type="AudioStream" uid="uid://boe43dst24dsw" path="res://Sounds/HeartBeatLoop.wav" id="5_o3iqk"]
-[ext_resource type="AudioStream" uid="uid://c6ni6ikk5whxr" path="res://Sounds/YIPPEE.wav" id="6_cjlrw"]
+[ext_resource type="Environment" uid="uid://or8h483du8al" path="res://MonEnvoir/MonEvoirmentEnvoir.tres" id="6_hpwft"]
+[ext_resource type="AudioStream" uid="uid://er13wd0cdel3" path="res://Sounds/MON JUMP.wav" id="7_41tas"]
 [ext_resource type="AudioStream" uid="uid://d30ou2123qx6n" path="res://Sounds/beep.wav" id="7_ovl8b"]
+[ext_resource type="AudioStream" uid="uid://7owgmk2ilj7d" path="res://Sounds/nerd.wav" id="8_2ejtn"]
 [ext_resource type="AudioStream" uid="uid://cus7k80c8bo1h" path="res://Sounds/Door movement.wav" id="8_of2h2"]
 [ext_resource type="Theme" uid="uid://64eykjmfoxai" path="res://Theme/EyeTheme.tres" id="10_iopva"]
 [ext_resource type="PackedScene" uid="uid://8f4a87tvfl0v" path="res://Scenes/MainMenuButton/MainMenuButton.tscn" id="11_1h37b"]
+[ext_resource type="AudioStream" uid="uid://06rior3i5v2o" path="res://Sounds/footsteps.wav" id="12_fgyt0"]
+[ext_resource type="AudioStream" uid="uid://b0ouxkx64asc1" path="res://Sounds/MON SCREAM.wav" id="13_y5h0h"]
+[ext_resource type="PackedScene" uid="uid://0lbeb045guj0" path="res://Assets/exit_sign.tscn" id="14_xowwo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i33ky"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -30,6 +35,69 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_263l1"]
 albedo_texture = ExtResource("2_wt2ls")
+
+[sub_resource type="Animation" id="Animation_poht5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-10.6217, 2.68706, -39.7399)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.68986, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D/ElevDoor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-23.3459, 8.68963, -44.3309)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:environment")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_hpwft")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ButtonMesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-23.7726, 1.34198, -42.1311)]
+}
 
 [sub_resource type="Animation" id="Animation_gph75"]
 resource_name = "WinScene"
@@ -105,7 +173,7 @@ tracks/5/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_cjlrw")
+"stream": ExtResource("8_2ejtn")
 }],
 "times": PackedFloat32Array(4.33333)
 }
@@ -147,51 +215,65 @@ tracks/8/path = NodePath("OmniLight3D")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = PackedFloat32Array(0.033333, 1, -10.6217, 2.68706, -39.7399, 0.366666, 1, -10.0982, 2.68706, -39.7399, 0.666666, 1, -8.54102, 2.20255, -39.7399, 1.13333, 1, -4.14614, 4.39964, -39.7399, 1.73333, 1, -0.770706, 2.30756, -39.7399, 2.4, 1, 2.95965, 2.30756, -40.4145, 3.13333, 1, 3.32343, 2.30756, -42.8505, 6.33333, 1, 3.32343, 2.30756, -42.8505, 6.65, 1, -3.072, 1.738, -42.851, 7.16667, 1, -12, 2.638, -42.851, 7.73333, 1, -21.542, 2.638, -42.851, 8, 1, -22.967, 2.553, -42.976, 8.33333, 1, -22.597, 2.553, -42.976)
-
-[sub_resource type="Animation" id="Animation_poht5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-10.6217, 2.68706, -39.7399)]
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Camera3D:environment")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 3.2, 6.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_hpwft"), null, ExtResource("6_hpwft")]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("ButtonMesh:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(5.86667, 5.93333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, -1.68986, 0)]
+"values": [Vector3(-23.7726, 1.34198, -42.1311), Vector3(-23.7726, 1.34198, -41.9145)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Node3D/ElevDoor:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-23.3459, 8.68963, -44.3309)]
+tracks/11/type = "audio"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Camera3D/MonScream")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_41tas")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("13_y5h0h")
+}],
+"times": PackedFloat32Array(0.4, 6.13333)
 }
+tracks/11/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0h357"]
 _data = {
 "RESET": SubResource("Animation_poht5"),
 "WinScene": SubResource("Animation_gph75")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6wje"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yg2wf"]
+material = SubResource("StandardMaterial3D_m6wje")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
 
 [node name="WinScene" type="Node3D"]
 script = ExtResource("1_q8y0f")
@@ -203,8 +285,12 @@ environment = SubResource("Environment_ygwvv")
 transform = Transform3D(0.0701279, 0, 0.281393, 0, 0.29, 0, -0.281393, 0, 0.0701279, -23.8352, 0, -43.0768)
 
 [node name="Skeleton3D" parent="Win_Animation_Main_Character_Model" index="0"]
-bones/8/position = Vector3(140.556, 0, -5.68434e-14)
-bones/9/rotation = Quaternion(-0.0403262, 0.165338, -0.0408997, 0.984563)
+bones/7/position = Vector3(18.344, 0.0271294, 26.0402)
+bones/7/rotation = Quaternion(0.050342, 0.632109, -0.47332, -0.611451)
+bones/8/position = Vector3(140.659, 0.0387061, -0.0717027)
+bones/8/rotation = Quaternion(0.917266, -0.267309, -0.16379, 0.245647)
+bones/9/position = Vector3(98.781, 0.0618469, 0.10325)
+bones/9/rotation = Quaternion(0.0343363, -0.158668, 0.0355054, 0.986096)
 
 [node name="Main_Model_for_animations" parent="Win_Animation_Main_Character_Model/Skeleton3D" index="0"]
 material_override = SubResource("StandardMaterial3D_263l1")
@@ -272,17 +358,27 @@ libraries = {
 }
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(-0.118785, 0, -0.99292, 0, 1, 0, 0.99292, 0, -0.118785, -10.6217, 2.68706, -39.7399)
+transform = Transform3D(-0.118785, 0, -0.99292, 0, 1, 0, 0.99292, 0, -0.118785, -22.597, 2.553, -42.976)
 light_color = Color(1, 0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.118785, 0, -0.99292, 0, 1, 0, 0.99292, 0, -0.118785, -10.6217, 2.68706, -39.7399)
+transform = Transform3D(-0.118782, 0, -0.99292, 0, 1, 0, 0.99292, 0, -0.118783, -10.6217, 2.68706, -39.7399)
+environment = ExtResource("6_hpwft")
 
-[node name="HeartBeat" type="AudioStreamPlayer" parent="Camera3D"]
+[node name="HeartBeat" type="AudioStreamPlayer3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77005, 0)
 stream = ExtResource("5_o3iqk")
-volume_db = 5.0
-pitch_scale = 1.55
-stream_paused = true
+volume_db = 30.0
+max_db = 4.0
+autoplay = true
+
+[node name="FootStep" type="AudioStreamPlayer3D" parent="Camera3D"]
+stream = ExtResource("12_fgyt0")
+pitch_scale = 0.85
+autoplay = true
+
+[node name="MonScream" type="AudioStreamPlayer3D" parent="Camera3D"]
+transform = Transform3D(-0.118783, 0, 0.99292, 0, 1, 0, -0.99292, 0, -0.118783, -0.033783, 0, -0.282406)
 
 [node name="Bang" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2046, 2.55765, -42.9983)
@@ -324,6 +420,13 @@ vertical_alignment = 1
 
 [node name="ToMainMenu" parent="WinMenu/MarginContainer/VBoxContainer" instance=ExtResource("11_1h37b")]
 layout_mode = 2
+
+[node name="ButtonMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -23.7726, 1.34198, -42.1311)
+mesh = SubResource("CylinderMesh_yg2wf")
+
+[node name="Exit Sign" parent="." instance=ExtResource("14_xowwo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -23.0497, 4.69384, -44.4725)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 

@@ -32,6 +32,8 @@ stretch_mode = 5
 
 [node name="NewGameButton" parent="VBoxContainer" instance=ExtResource("2_bakqk")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../ExitButton")
 
 [node name="ExitButton" parent="VBoxContainer" instance=ExtResource("3_70ln8")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../NewGameButton")

@@ -88,5 +88,7 @@ func _on_key_card_reader_card_reader_activate() -> void:
 	if SecDoor:
 		if get_parent().KeyCardGrabbed:
 			ToggleDoor()
+		else:
+			$NeedCardAudio.play()
 	else:
 		ToggleDoor()

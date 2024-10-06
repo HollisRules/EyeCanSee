@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://baq8nx6iyf8is"]
+[gd_scene load_steps=3 format=3 uid="uid://diex5gjqt2wwy"]
 
-[ext_resource type="Shader" path="res://night.gdshader" id="1_yatge"]
+[ext_resource type="Shader" path="res://Shader/night.gdshader" id="1_5q7p8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23l6w"]
-shader = ExtResource("1_yatge")
+shader = ExtResource("1_5q7p8")
 shader_parameter/luminance = Color(0.3086, 0.6094, 0.082, 1)
 shader_parameter/basecolor = Color(0.2, 1, 0.4, 1)
 shader_parameter/brightness = 2.0

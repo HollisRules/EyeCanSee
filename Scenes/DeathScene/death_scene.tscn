@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://d4d0cgdkwonio"]
+[gd_scene load_steps=21 format=3 uid="uid://d4d0cgdkwonio"]
 
 [ext_resource type="PackedScene" uid="uid://db0xqahnf4gsr" path="res://Scenes/Player/Player_death_animation_model.fbx" id="1_5occb"]
 [ext_resource type="Script" path="res://Scenes/DeathScene/death_scene.gd" id="1_uc8xn"]
 [ext_resource type="Texture2D" uid="uid://b12e6mf2u68at" path="res://Textures/PlayerTexture.png" id="2_50rel"]
 [ext_resource type="AudioStream" uid="uid://bx8ojyn5e77ea" path="res://Sounds/Monster noises.wav" id="2_ef2ch"]
 [ext_resource type="Material" uid="uid://du1ho2d7owh8o" path="res://GAMEHAM STUFF/Materials/Concrete.tres" id="2_lgjui"]
+[ext_resource type="AudioStream" uid="uid://b0ouxkx64asc1" path="res://Sounds/MON SCREAM.wav" id="3_28d7a"]
 [ext_resource type="AudioStream" uid="uid://caiwa43bnoo3n" path="res://Sounds/no.wav" id="3_ylcag"]
 [ext_resource type="AudioStream" uid="uid://cfuh0suywm76x" path="res://Sounds/Scream.wav" id="4_kornu"]
 [ext_resource type="Theme" uid="uid://64eykjmfoxai" path="res://Theme/EyeTheme.tres" id="7_7re1b"]
@@ -106,6 +107,21 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector3(-0.364687, 0, 0), Vector3(-0.233874, 0, 0), Vector3(-0.111701, 0, 0), Vector3(-0.678933, 0, 0)]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Camera3D/MonScream")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_28d7a")
+}],
+"times": PackedFloat32Array(0.966667)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="Animation" id="Animation_bbkbm"]
 length = 0.001
@@ -217,6 +233,9 @@ omni_range = 0.914
 stream = ExtResource("2_ef2ch")
 autoplay = true
 
+[node name="MonScream" type="AudioStreamPlayer3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.934235, -0.356657, 0, 0.356657, 0.934235, 0, 0.0161526, -0.190135)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_16fql")
@@ -229,20 +248,20 @@ mesh = SubResource("PlaneMesh_r7xne")
 transform = Transform3D(0.29, 0, 0, 0, 0.29, 0, 0, 0, 0.29, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Player_death_animation_model" index="0"]
-bones/2/rotation = Quaternion(-1.86265e-09, 1.86265e-09, 0, 1)
-bones/4/rotation = Quaternion(-2.79397e-09, 0.962618, 2.98023e-08, 0.270862)
-bones/5/rotation = Quaternion(0, 0.0733387, -1.0986e-25, 0.997307)
-bones/6/rotation = Quaternion(2.41872e-25, 0.188199, 1.11152e-24, 0.982131)
-bones/7/position = Vector3(18.3193, 0, 26.0345)
-bones/7/rotation = Quaternion(-1.11759e-08, -0.959779, -7.45058e-09, 0.280756)
-bones/8/position = Vector3(140.556, -7.55067e-15, -1.13687e-13)
-bones/8/rotation = Quaternion(0.991296, -0.00856791, 0.100775, -0.0842801)
+bones/2/rotation = Quaternion(-0.03286, -0.0407801, 0.405537, 0.912577)
+bones/4/rotation = Quaternion(-0.526717, 0.674274, 0.0468478, 0.51549)
+bones/5/rotation = Quaternion(-0.0647185, 0.0344978, -0.880083, 0.469123)
+bones/6/rotation = Quaternion(0, 0.0947804, -6.20385e-25, 0.995498)
+bones/7/position = Vector3(18.3856, -0.0132447, 26.0309)
+bones/7/rotation = Quaternion(0.859036, -0.274506, 0.137453, 0.409646)
+bones/8/position = Vector3(140.408, 0.0400038, -0.0417243)
+bones/8/rotation = Quaternion(0.583604, -0.626453, 0.513533, -0.0569869)
 
 [node name="Main_Model_for_animations" parent="Player_death_animation_model/Skeleton3D" index="0"]
 material_override = SubResource("StandardMaterial3D_tp6hy")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Player_death_animation_model/Skeleton3D" index="1"]
-transform = Transform3D(-6.38653e-06, -3.7253e-11, 0.01, 0.01, -2.37917e-14, 6.38653e-06, -6.93893e-20, 0.01, 3.7253e-11, -4.65661e-09, 6.75873, 0)
+transform = Transform3D(0.000473517, -0.000925793, 0.00994579, 0.00667785, -0.00737546, -0.00100447, 0.00742847, 0.00668921, 0.00026899, 0.054553, 6.30786, 0.902968)
 bone_name = "head_tip"
 bone_idx = 3
 

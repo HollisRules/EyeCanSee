@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cuxyckw1iyx1g"
+path="res://.godot/imported/is this a wall.wav-6e62453e01cebc31c787f7a2a4f00d16.sample"
+
+[deps]
+
+source_file="res://Sounds/is this a wall.wav"
+dest_files=["res://.godot/imported/is this a wall.wav-6e62453e01cebc31c787f7a2a4f00d16.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

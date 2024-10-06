@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kemfdeam4lto"]
+
+[ext_resource type="Environment" uid="uid://or8h483du8al" path="res://MonEnvoir/MonEvoirmentEnvoir.tres" id="1_sf8ch"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = ExtResource("1_sf8ch")

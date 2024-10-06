@@ -37,6 +37,8 @@ var tween : Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.T
 
 func _ready() -> void:
 	Camera.global_transform = PlayerCam.global_transform
+	$WorldEnvironment.environment.ambient_light_color = Color.WHITE
+	$WorldEnvironment.environment.ambient_light_energy = .1
 
 func MoveCamera() -> void:
 	tween.kill()
@@ -54,11 +56,12 @@ func _process(delta: float) -> void:
 		MoveCamera()
 	if FollowCam:
 		if CamOnPlayer:
-			Camera
+			Camera.environment = null
 			PlayerRef.Model.get_child(0).get_child(0).visible = false
 			Camera.set_cull_mask_value(2,false)
 			Camera.global_transform = PlayerRef.Camera.global_transform
 		else:
+			Camera.environment = load("res://MonEnvoir/MonEvoirmentEnvoir.tres")
 			PlayerRef.Model.get_child(0).get_child(0).visible = true
 			Camera.set_cull_mask_value(2,true)
 			Camera.global_transform = MonstRef.Camera.global_transform
@@ -74,9 +77,20 @@ func _on_perspective_monster_vision_changed(ItSeesHim: bool) -> void:
 
 func _on_key_card_key_card_grabbed() -> void:
 	KeyCardGrabbed = true
+	$IFoundKeyCard.play()
+	await $IFoundKeyCard.finished
 	$GlassBreaks.play()
+	$MonScream.play()
+	await $GlassBreaks.finished
+	$Lights.visible = false
+	$WorldEnvironment.environment.ambient_light_color = Color.RED
+	$WorldEnvironment.environment.ambient_light_energy = .03
+	$OhSHitPA.play()
 	MonstRef.global_position = $MonsterSpawn.global_position
 	MonstRef.get_child(7).monitoring = true
+	
+	
+	
 
 
 func _on_perspective_monster_killed_player() -> void:
@@ -85,3 +99,16 @@ func _on_perspective_monster_killed_player() -> void:
 
 func _on_win_box_body_entered(body: Node3D) -> void:
 	get_tree().change_scene_to_file("res://Scenes/WinScene/win_scene.tscn")
+
+
+func _on_initial_pa_finished() -> void:
+	var tween : Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	var GoalPos : Vector3 = $InitialDoor.global_position
+	GoalPos.y = 7
+	$InitialDoor/AudioStreamPlayer3D.play()
+	tween.tween_property($InitialDoor, "global_position", GoalPos, 3)
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	$"Theres something in the way".play()
+	$Area3D.queue_free()

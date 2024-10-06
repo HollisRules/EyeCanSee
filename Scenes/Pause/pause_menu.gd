@@ -19,4 +19,5 @@ func pause() -> void:
 		visible = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().paused = true
+		$VBoxContainer/RestartButton.grab_focus()
 	paused = !paused
