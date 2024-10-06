@@ -1,16 +1,21 @@
-[gd_scene load_steps=17 format=3 uid="uid://d4d0cgdkwonio"]
+[gd_scene load_steps=20 format=3 uid="uid://d4d0cgdkwonio"]
 
 [ext_resource type="PackedScene" uid="uid://db0xqahnf4gsr" path="res://Scenes/Player/Player_death_animation_model.fbx" id="1_5occb"]
 [ext_resource type="Script" path="res://Scenes/DeathScene/death_scene.gd" id="1_uc8xn"]
 [ext_resource type="Texture2D" uid="uid://b12e6mf2u68at" path="res://Textures/PlayerTexture.png" id="2_50rel"]
+[ext_resource type="AudioStream" uid="uid://bx8ojyn5e77ea" path="res://Sounds/Monster noises.wav" id="2_ef2ch"]
+[ext_resource type="Material" uid="uid://du1ho2d7owh8o" path="res://GAMEHAM STUFF/Materials/Concrete.tres" id="2_lgjui"]
 [ext_resource type="AudioStream" uid="uid://caiwa43bnoo3n" path="res://Sounds/no.wav" id="3_ylcag"]
 [ext_resource type="AudioStream" uid="uid://cfuh0suywm76x" path="res://Sounds/Scream.wav" id="4_kornu"]
-[ext_resource type="PackedScene" uid="uid://dwww5x3tpohl" path="res://Scenes/Buttons/restart_button.tscn" id="6_jsf75"]
+[ext_resource type="Theme" uid="uid://64eykjmfoxai" path="res://Theme/EyeTheme.tres" id="7_7re1b"]
+[ext_resource type="PackedScene" uid="uid://8f4a87tvfl0v" path="res://Scenes/MainMenuButton/MainMenuButton.tscn" id="8_r3ikh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2u6lm"]
 sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_cover_modulate = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Sky" id="Sky_guyip"]
 sky_material = SubResource("ProceduralSkyMaterial_2u6lm")
@@ -172,6 +177,7 @@ _data = {
 }
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_r7xne"]
+material = ExtResource("2_lgjui")
 size = Vector2(5000, 5000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tp6hy"]
@@ -186,11 +192,16 @@ shadow_enabled = true
 spot_range = 10.0963
 spot_angle = 24.208
 
+[node name="OmniLight3D" type="OmniLight3D" parent="SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.631728, -3.78902)
+light_energy = 0.05
+omni_range = 2.0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nucdr")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.934236, 0.356656, 0, -0.356656, 0.934236, 0, 2.82757, 3.40855)
+transform = Transform3D(1, 0, 0, 0, 0.934235, 0.356657, 0, -0.356657, 0.934235, 0, 2.82757, 3.40855)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.777322, 0.629103, 0, -0.629103, 0.777322, 0, -0.0181019, 0.868428)
@@ -201,6 +212,10 @@ mesh = SubResource("CapsuleMesh_jufdj")
 light_color = Color(1, 0, 0, 1)
 light_energy = 0.025
 omni_range = 0.914
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="Camera3D"]
+stream = ExtResource("2_ef2ch")
+autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -214,19 +229,20 @@ mesh = SubResource("PlaneMesh_r7xne")
 transform = Transform3D(0.29, 0, 0, 0, 0.29, 0, 0, 0, 0.29, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Player_death_animation_model" index="0"]
-bones/2/rotation = Quaternion(-0.0297255, -0.0441745, 0.367804, 0.928378)
-bones/4/rotation = Quaternion(-0.526717, 0.674274, 0.0468478, 0.51549)
-bones/5/rotation = Quaternion(-0.0647184, 0.0344977, -0.880083, 0.469122)
-bones/6/rotation = Quaternion(6.20385e-25, 0.356159, 4.65289e-25, 0.934425)
-bones/7/rotation = Quaternion(0.859036, -0.274506, 0.137453, 0.409646)
-bones/8/position = Vector3(140.407, 0.0677955, -0.0478676)
-bones/8/rotation = Quaternion(0.559118, -0.616128, 0.554771, 0.00145092)
+bones/2/rotation = Quaternion(-1.86265e-09, 1.86265e-09, 0, 1)
+bones/4/rotation = Quaternion(-2.79397e-09, 0.962618, 2.98023e-08, 0.270862)
+bones/5/rotation = Quaternion(0, 0.0733387, -1.0986e-25, 0.997307)
+bones/6/rotation = Quaternion(2.41872e-25, 0.188199, 1.11152e-24, 0.982131)
+bones/7/position = Vector3(18.3193, 0, 26.0345)
+bones/7/rotation = Quaternion(-1.11759e-08, -0.959779, -7.45058e-09, 0.280756)
+bones/8/position = Vector3(140.556, -7.55067e-15, -1.13687e-13)
+bones/8/rotation = Quaternion(0.991296, -0.00856791, 0.100775, -0.0842801)
 
 [node name="Main_Model_for_animations" parent="Player_death_animation_model/Skeleton3D" index="0"]
 material_override = SubResource("StandardMaterial3D_tp6hy")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Player_death_animation_model/Skeleton3D" index="1"]
-transform = Transform3D(0.000596915, -0.000872537, 0.00994396, 0.00725576, -0.00680352, -0.00103253, 0.00685549, 0.00727673, 0.000226979, 0.0701248, 6.3825, 0.835075)
+transform = Transform3D(-6.38653e-06, -3.7253e-11, 0.01, 0.01, -2.37917e-14, 6.38653e-06, -6.93893e-20, 0.01, 3.7253e-11, -4.65661e-09, 6.75873, 0)
 bone_name = "head_tip"
 bone_idx = 3
 
@@ -239,7 +255,8 @@ stream = ExtResource("4_kornu")
 [node name="main_grp" parent="Player_death_animation_model" index="1"]
 transform = Transform3D(1.91069e-17, 4.37114e-10, -0.01, 0.01, -4.37114e-10, 0, -4.37114e-10, -0.01, -4.37114e-10, 4.93038e-32, 4.10062, 0)
 
-[node name="Control" type="Control" parent="."]
+[node name="DeathMenu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -249,25 +266,32 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="MarginContainer" type="MarginContainer" parent="DeathMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
 
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DeathMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("7_7re1b")
 text = "You Died"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RestartButton" parent="Control/VBoxContainer" instance=ExtResource("6_jsf75")]
+[node name="ToMainMenu" parent="DeathMenu/MarginContainer/VBoxContainer" instance=ExtResource("8_r3ikh")]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control/VBoxContainer"]
-layout_mode = 2
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 
 [editable path="Player_death_animation_model"]

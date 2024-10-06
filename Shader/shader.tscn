@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://baq8nx6iyf8is"]
+
+[ext_resource type="Shader" path="res://night.gdshader" id="1_yatge"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_23l6w"]
+shader = ExtResource("1_yatge")
+shader_parameter/luminance = Color(0.3086, 0.6094, 0.082, 1)
+shader_parameter/basecolor = Color(0.2, 1, 0.4, 1)
+shader_parameter/brightness = 2.0
+shader_parameter/noise_level = 0.5
+shader_parameter/vignette_level = 0.4
+shader_parameter/edge_x = 0.75
+shader_parameter/edge_y = 4.0
+shader_parameter/flicker_level = 0.1
+
+[node name="Shader" type="Node2D"]
+material = SubResource("ShaderMaterial_23l6w")

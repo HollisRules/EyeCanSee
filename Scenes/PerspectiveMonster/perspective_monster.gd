@@ -26,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	SightRay.target_position = SightRay.to_local(playerRef.Camera.global_position)
 	DoesItSee()
 	nav.target_position = playerRef.global_position
+	print(str(nav.target_position))
 	var direction = (nav.get_next_path_position() - global_position).normalized()
 	input_direction = Vector2(direction.x, direction.z)
 
@@ -42,4 +43,7 @@ func DoesItSee():
 
 
 func _on_kill_zone_body_entered(body: Node3D) -> void:
-	emit_signal("KilledPlayer")
+	if body is Player:
+		emit_signal("KilledPlayer")
+	elif body is InterBody:
+		body.KillCrate()

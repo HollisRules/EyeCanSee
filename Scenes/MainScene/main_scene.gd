@@ -56,9 +56,11 @@ func _process(delta: float) -> void:
 		if CamOnPlayer:
 			Camera
 			PlayerRef.Model.get_child(0).get_child(0).visible = false
+			Camera.set_cull_mask_value(2,false)
 			Camera.global_transform = PlayerRef.Camera.global_transform
 		else:
 			PlayerRef.Model.get_child(0).get_child(0).visible = true
+			Camera.set_cull_mask_value(2,true)
 			Camera.global_transform = MonstRef.Camera.global_transform
 
 func _on_perspective_monster_vision_changed(ItSeesHim: bool) -> void:
@@ -72,7 +74,14 @@ func _on_perspective_monster_vision_changed(ItSeesHim: bool) -> void:
 
 func _on_key_card_key_card_grabbed() -> void:
 	KeyCardGrabbed = true
+	$GlassBreaks.play()
+	MonstRef.global_position = $MonsterSpawn.global_position
+	MonstRef.get_child(7).monitoring = true
 
 
 func _on_perspective_monster_killed_player() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://Scenes/DeathScene/death_scene.tscn")
+
+
+func _on_win_box_body_entered(body: Node3D) -> void:
+	get_tree().change_scene_to_file("res://Scenes/DeathScene/death_scene.tscn")

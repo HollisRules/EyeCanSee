@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://8f4a87tvfl0v"]
+
+[ext_resource type="Theme" uid="uid://64eykjmfoxai" path="res://Theme/EyeTheme.tres" id="1_ivp5n"]
+[ext_resource type="Script" path="res://Scenes/MainMenuButton/main_menu_button.gd" id="2_6jdjx"]
+
+[node name="ToMainMenu" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_ivp5n")
+text = "Main Menu"
+script = ExtResource("2_6jdjx")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

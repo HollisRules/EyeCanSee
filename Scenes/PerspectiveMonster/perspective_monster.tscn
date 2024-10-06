@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://by0kj2l4nj7o8"]
+[gd_scene load_steps=8 format=3 uid="uid://by0kj2l4nj7o8"]
 
 [ext_resource type="Script" path="res://Scenes/PerspectiveMonster/perspective_monster.gd" id="1_0axm1"]
 [ext_resource type="Texture2D" uid="uid://cgy0tyfcc6rwh" path="res://Scenes/PerspectiveMonster/Monster.png" id="2_4sah7"]
 [ext_resource type="AudioStream" uid="uid://boe43dst24dsw" path="res://Sounds/HeartBeatLoop.wav" id="3_3jogs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mgob5"]
+friction = 0.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtuys"]
 radius = 0.3
@@ -12,12 +15,13 @@ height = 2.65
 length = 0.26
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aollq"]
-radius = 1.5
+radius = 0.75
 height = 3.39
 
 [node name="PerspectiveMonster" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 63
+physics_material_override = SubResource("PhysicsMaterial_mgob5")
 script = ExtResource("1_0axm1")
 isInputGlobal = true
 
@@ -33,7 +37,7 @@ shape = SubResource("SeparationRayShape3D_5ujkh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54465, 0)
 pixel_size = 0.0008
 billboard = 2
-no_depth_test = true
+shaded = true
 texture = ExtResource("2_4sah7")
 
 [node name="MonsterCamera" type="Camera3D" parent="."]
@@ -50,6 +54,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04904, 0)
 stream = ExtResource("3_3jogs")
 attenuation_model = 1
 autoplay = true
+stream_paused = true
 max_distance = 10.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -59,9 +64,15 @@ avoidance_enabled = true
 [node name="KillZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41575, 0)
 collision_layer = 8
-collision_mask = 4
+collision_mask = 20
+monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone"]
 shape = SubResource("CapsuleShape3D_aollq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68203, -0.249581)
+light_color = Color(1, 0, 0, 1)
+omni_range = 1.424
 
 [connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]

@@ -20,6 +20,7 @@ size = Vector3(2.1, 4, 0.25)
 [node name="Door" type="Node3D"]
 script = ExtResource("1_nfhu0")
 currentState = 2
+HeightChange = 4.0
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
