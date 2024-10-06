@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cus7k80c8bo1h"
+path="res://.godot/imported/Door movement.wav-cd06054a3fbe7f1a609e193ba37cd36f.sample"
+
+[deps]
+
+source_file="res://Sounds/Door movement.wav"
+dest_files=["res://.godot/imported/Door movement.wav-cd06054a3fbe7f1a609e193ba37cd36f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

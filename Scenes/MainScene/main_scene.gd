@@ -29,6 +29,9 @@ var FollowCam : bool = true
 ##Ref To MonsterCamera
 @onready var MonstCam : Camera3D = MonstRef.Camera
 
+##If player has the keycard
+@onready var KeyCardGrabbed : bool = false
+
 ##Tween used for transitioning camera
 var tween : Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 
@@ -51,13 +54,21 @@ func _process(delta: float) -> void:
 		MoveCamera()
 	if FollowCam:
 		if CamOnPlayer:
+			Camera
+			PlayerRef.Model.get_child(0).get_child(0).visible = false
 			Camera.global_transform = PlayerRef.Camera.global_transform
 		else:
+			PlayerRef.Model.get_child(0).get_child(0).visible = true
 			Camera.global_transform = MonstRef.Camera.global_transform
 
 func _on_perspective_monster_vision_changed(ItSeesHim: bool) -> void:
 	if ItSeesHim:
 		CamOnPlayer = false
+		PlayerRef.Model.get_child(0).get_child(0).visible = true
 	else:
 		CamOnPlayer = true
 	Transitioning = true
+
+
+func _on_key_card_key_card_grabbed() -> void:
+	KeyCardGrabbed = true

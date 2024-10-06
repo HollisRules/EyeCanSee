@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cddbyx8gdt7ax"]
+
+[ext_resource type="Texture2D" uid="uid://ccfh4peo7xioj" path="res://Textures/Sploot.png" id="1_x2ea1"]
+
+[node name="NormalSploot" type="Decal"]
+texture_albedo = ExtResource("1_x2ea1")

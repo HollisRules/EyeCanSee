@@ -126,10 +126,10 @@ func apply_drag(delta: float):
 func apply_movement(delta: float):
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor:
-			apply_central_impulse(floor_normal * jump_force)
-		elif is_on_wall:
-			var new_norma = (wall_normal + global_basis.y).normalized()
-			apply_central_impulse(new_norma * jump_force)
+			apply_central_impulse(Vector3(0,1,0) * jump_force)
+		#elif is_on_wall:
+			#var new_norma = (wall_normal + global_basis.y).normalized()
+			#apply_central_impulse(new_norma * jump_force)
 	if Input.is_action_just_pressed("run") and is_on_floor:
 		is_running = true
 	var forward = floor_normal.cross(orientation_node.global_basis.x)

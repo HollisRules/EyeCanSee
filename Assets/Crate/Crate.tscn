@@ -1,14 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://sk70fgtbhnh2"]
+[gd_scene load_steps=6 format=3 uid="uid://sk70fgtbhnh2"]
 
 [ext_resource type="Script" path="res://Scenes/Interactables/InteractabelRigidBody/inter_rigid_body.gd" id="1_pmrg5"]
+[ext_resource type="Texture2D" uid="uid://ck8ox80vbx0xt" path="res://Textures/box.png" id="2_fn6n1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ve5ut"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekg22"]
+albedo_texture = ExtResource("2_fn6n1")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_od3re"]
+material = SubResource("StandardMaterial3D_ekg22")
 
 [node name="Crate" type="RigidBody3D"]
 collision_layer = 16
-collision_mask = 31
+collision_mask = 63
+mass = 20.0
+continuous_cd = true
 script = ExtResource("1_pmrg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

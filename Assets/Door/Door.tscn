@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://0w04idln1xgn"]
+
+[ext_resource type="Script" path="res://Assets/Door/door.gd" id="1_nfhu0"]
+[ext_resource type="Texture2D" uid="uid://bhxmm5lcaju07" path="res://Textures/Door.png" id="2_p08y4"]
+[ext_resource type="FontFile" uid="uid://q1vbmciv7j6g" path="res://Font/impact.ttf" id="3_5ws01"]
+[ext_resource type="PackedScene" uid="uid://bnw3bjufbnl5l" path="res://Assets/KeyCardReader/key_card_reader.tscn" id="3_yk8yh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7fm8x"]
+size = Vector3(2.1, 4, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwxmm"]
+albedo_texture = ExtResource("2_p08y4")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d56wp"]
+material = SubResource("StandardMaterial3D_cwxmm")
+size = Vector3(2.1, 4, 0.25)
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_nfhu0")
+currentState = 2
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_mask = 63
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("BoxShape3D_7fm8x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+mesh = SubResource("BoxMesh_d56wp")
+
+[node name="SecDoorLabel1" type="Label3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0554776, 0.130118)
+visible = false
+pixel_size = 0.0078
+modulate = Color(0, 0, 0, 1)
+text = "Security
+Door"
+font = ExtResource("3_5ws01")
+font_size = 64
+outline_size = 0
+
+[node name="SecDoorLabel2" type="Label3D" parent="AnimatableBody3D/SecDoorLabel1"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.000477552, -0.260118)
+pixel_size = 0.0078
+modulate = Color(0, 0, 0, 1)
+text = "Security
+Door"
+font = ExtResource("3_5ws01")
+font_size = 64
+outline_size = 0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnimatableBody3D"]
+
+[node name="KeyCardReader" parent="." instance=ExtResource("3_yk8yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64362, 1.56318, 0.289616)
+
+[node name="KeyCardReader2" parent="." instance=ExtResource("3_yk8yh")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.64362, 1.56318, -0.27267)
+
+[connection signal="CardReaderActivate" from="KeyCardReader" to="." method="_on_key_card_reader_card_reader_activate"]
+[connection signal="CardReaderActivate" from="KeyCardReader2" to="." method="_on_key_card_reader_card_reader_activate"]

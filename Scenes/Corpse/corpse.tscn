@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b78qya7ur7jw0"]
+
+[ext_resource type="PackedScene" uid="uid://bpnblie65ukl4" path="res://Scenes/Corpse/Dead_guard_model.fbx" id="1_bchxa"]
+[ext_resource type="Texture2D" uid="uid://bfjvdi33ce36i" path="res://Textures/CorpseTexture.png" id="2_3de2e"]
+[ext_resource type="PackedScene" uid="uid://dlat5nb432fov" path="res://Assets/KeyCardReader/key_card.tscn" id="3_74m60"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwiju"]
+albedo_texture = ExtResource("2_3de2e")
+
+[node name="Corpse" type="Node3D"]
+
+[node name="Dead_guard_model" parent="." instance=ExtResource("1_bchxa")]
+transform = Transform3D(0.29, 0, 0, 0, 0.29, 0, 0, 0, 0.29, 0, 0, 0)
+
+[node name="Dead_guard" parent="Dead_guard_model" index="0"]
+material_override = SubResource("StandardMaterial3D_pwiju")
+
+[node name="KeyCard" parent="." instance=ExtResource("3_74m60")]
+transform = Transform3D(-0.0409628, 0.314596, -0.948341, -0.939805, 0.310131, 0.143475, 0.339247, 0.897133, 0.282955, 0.110591, 0.675219, 0.139844)
+
+[editable path="Dead_guard_model"]

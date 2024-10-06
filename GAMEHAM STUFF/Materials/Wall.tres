@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://mqu88wv1bwkx"]
+
+[ext_resource type="Texture2D" uid="uid://56pan1t7s4x6" path="res://Materials/wall panel.png" id="1_bscvr"]
+
+[resource]
+albedo_texture = ExtResource("1_bscvr")
+uv1_scale = Vector3(1, 0.2, 1)
+uv1_offset = Vector3(0, -0.095, 0)
+uv1_triplanar = true

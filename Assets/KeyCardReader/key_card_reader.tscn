@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnw3bjufbnl5l"]
+[gd_scene load_steps=7 format=3 uid="uid://bnw3bjufbnl5l"]
 
 [ext_resource type="Script" path="res://Assets/KeyCardReader/key_card_reader.gd" id="1_agylc"]
+[ext_resource type="AudioStream" uid="uid://d30ou2123qx6n" path="res://Sounds/beep.wav" id="2_4q8e5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5cuew"]
 size = Vector3(0.5, 0.5, 0.2901)
@@ -34,3 +35,6 @@ mesh = SubResource("BoxMesh_kg22j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10758, 0)
 material_override = SubResource("StandardMaterial3D_jg5bm")
 mesh = SubResource("SphereMesh_50oxu")
+
+[node name="BeepAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_4q8e5")

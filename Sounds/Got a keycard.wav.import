@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqlcb7tkdkvxt"
+path="res://.godot/imported/Got a keycard.wav-f1b7213732c917e210124f3accb8bc60.sample"
+
+[deps]
+
+source_file="res://Sounds/Got a keycard.wav"
+dest_files=["res://.godot/imported/Got a keycard.wav-f1b7213732c917e210124f3accb8bc60.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

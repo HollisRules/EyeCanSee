@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://di3qsuf7euu5"]
+[gd_scene load_steps=12 format=3 uid="uid://di3qsuf7euu5"]
 
 [ext_resource type="PackedScene" uid="uid://evr7qe017njt" path="res://Scenes/MainScene/main_scene.tscn" id="1_tnxgj"]
 [ext_resource type="PackedScene" uid="uid://by0kj2l4nj7o8" path="res://Scenes/PerspectiveMonster/perspective_monster.tscn" id="2_2kgns"]
 [ext_resource type="PackedScene" uid="uid://2c5auuu6qdrs" path="res://Scenes/Player/Player.tscn" id="3_lnc5a"]
+[ext_resource type="PackedScene" uid="uid://c4hkmkv21n0o" path="res://GAMEHAM STUFF/Map.tscn" id="4_niw2c"]
 [ext_resource type="PackedScene" uid="uid://sk70fgtbhnh2" path="res://Assets/Crate/Crate.tscn" id="4_s6llo"]
-[ext_resource type="PackedScene" uid="uid://bnw3bjufbnl5l" path="res://Assets/KeyCardReader/key_card_reader.tscn" id="5_m3p8q"]
-[ext_resource type="PackedScene" uid="uid://dlat5nb432fov" path="res://Assets/KeyCardReader/key_card.tscn" id="6_6dngh"]
+[ext_resource type="PackedScene" uid="uid://0w04idln1xgn" path="res://Assets/Door/Door.tscn" id="5_1w43l"]
+[ext_resource type="PackedScene" uid="uid://b78qya7ur7jw0" path="res://Scenes/Corpse/corpse.tscn" id="7_qnmif"]
+[ext_resource type="PackedScene" uid="uid://cddbyx8gdt7ax" path="res://Assets/Decals/NormalSploot.tscn" id="8_c04v7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wc568"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,20 +19,10 @@ sky_material = SubResource("ProceduralSkyMaterial_wc568")
 [sub_resource type="Environment" id="Environment_si8rw"]
 background_mode = 2
 sky = SubResource("Sky_qgf4d")
-ambient_light_sky_contribution = 0.05
 ambient_light_energy = 0.05
 tonemap_mode = 2
 glow_enabled = true
 glow_blend_mode = 0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_jp87c"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5dcnx"]
-noise = SubResource("FastNoiseLite_jp87c")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke1wv"]
-albedo_texture = SubResource("NoiseTexture2D_5dcnx")
-uv1_triplanar = true
 
 [node name="MainLevel" node_paths=PackedStringArray("PlayerRef", "MonstRef") instance=ExtResource("1_tnxgj")]
 PlayerRef = NodePath("Player")
@@ -40,54 +32,146 @@ TranMovementSpeed = 25.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
 environment = SubResource("Environment_si8rw")
 
-[node name="LevelCombiner" type="CSGCombiner3D" parent="." index="2"]
-material_override = SubResource("StandardMaterial3D_ke1wv")
-use_collision = true
+[node name="Camera" parent="." index="1"]
+cull_mask = 1048573
 
-[node name="CSGBox3D" type="CSGBox3D" parent="LevelCombiner" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99526, -1.59251, -6.49156)
-size = Vector3(30.8649, 1, 24.7101)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="LevelCombiner" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 1.54567, -11.21)
-size = Vector3(8.01575, 5.51257, 1)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="LevelCombiner" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.66172, -0.658561, -10.3157)
-
-[node name="PerspectiveMonster" parent="." index="3" node_paths=PackedStringArray("playerRef", "mainScene") instance=ExtResource("2_2kgns")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29373, -0.949931, -14.9908)
+[node name="PerspectiveMonster" parent="." index="2" node_paths=PackedStringArray("playerRef", "mainScene") instance=ExtResource("2_2kgns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11776, 0.641097, 10.661)
 playerRef = NodePath("../Player")
 mainScene = NodePath("..")
 
-[node name="Player" parent="." index="4" instance=ExtResource("3_lnc5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51391, 0, -4.3968)
-collision_mask = 31
+[node name="Player" parent="." index="3" instance=ExtResource("3_lnc5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2573, 0.999568, -3.08022)
 mass = 60.0
 TurnRate = 20.0
-ObjectForceMult = 100.0
-ObjectDampMult = 20.0
+ObjectForceMult = 500.0
+ObjectDampMult = 30.0
 jump_force = 350.0
-walk_force = 800.0
+walk_force = 900.0
 run_force = 1000.0
 drag_force = 0.25
 
-[node name="Crate" parent="." index="5" instance=ExtResource("4_s6llo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92091, -0.299183, -9.6267)
-mass = 10.0
+[node name="CSG" parent="." index="4" instance=ExtResource("4_niw2c")]
 
-[node name="Crate2" parent="." index="6" instance=ExtResource("4_s6llo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.66754, -0.299183, -8.81979)
-mass = 10.0
+[node name="TestRoomDOor" parent="." index="5" instance=ExtResource("5_1w43l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49986, 0, 0.00490069)
 
-[node name="Crate3" parent="." index="7" instance=ExtResource("4_s6llo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.44124, -0.299183, -9.22187)
-mass = 10.0
+[node name="HallwayDoor" parent="." index="6" instance=ExtResource("5_1w43l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.193555, 0, -8.44076)
 
-[node name="KeyCardReader" parent="." index="8" instance=ExtResource("5_m3p8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.71898, 0.0955724, -10.6871)
+[node name="BoxRoomDoor" parent="." index="7" instance=ExtResource("5_1w43l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.28578, 0, 3.35838)
 
-[node name="KeyCard" parent="." index="9" instance=ExtResource("6_6dngh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.47304, -0.133796, -10.0519)
+[node name="KeyCardRoomDoor" parent="." index="8" instance=ExtResource("5_1w43l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.8349, 0, -0.00396001)
+SecDoor = true
+
+[node name="SmallWallsRoom" parent="." index="9" instance=ExtResource("5_1w43l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.4957, 0.0073476, -28.1486)
+SecDoor = true
+
+[node name="SmallWallsRoom2" parent="." index="10" instance=ExtResource("5_1w43l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.32547, 0.00734748, -41.8296)
+SecDoor = true
+
+[node name="Crate" parent="." index="11" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23202, 0.661946, -4.71936)
+
+[node name="Crate2" parent="." index="12" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23202, 1.92094, -4.71936)
+
+[node name="Crate3" parent="." index="13" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62177, 0.720196, -6.09484)
+
+[node name="Crate4" parent="." index="14" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22039, 0.720196, -3.56154)
+
+[node name="Crate5" parent="." index="15" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.518, 0.720196, -4.14637)
+
+[node name="Crate21" parent="." index="16" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.19111, 0.998998, -38.4632)
+
+[node name="Crate22" parent="." index="17" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.19111, 2.25799, -38.4632)
+
+[node name="Crate23" parent="." index="18" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.80136, 1.05725, -39.8387)
+
+[node name="Crate24" parent="." index="19" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.20273, 1.05725, -37.3054)
+
+[node name="Crate25" parent="." index="20" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.90513, 1.05725, -37.8902)
+
+[node name="Crate6" parent="." index="21" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8862, 0.661946, -1.60184)
+
+[node name="Crate7" parent="." index="22" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8862, 1.92094, 9.90916)
+
+[node name="Crate8" parent="." index="23" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4965, 0.720196, 8.53368)
+
+[node name="Crate9" parent="." index="24" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8979, 0.720196, 11.067)
+
+[node name="Crate10" parent="." index="25" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.60026, 0.720196, 10.4822)
+
+[node name="Crate11" parent="." index="26" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45913, 3.21984, 9.90916)
+
+[node name="Crate12" parent="." index="27" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45913, 4.47883, 9.90916)
+
+[node name="Crate13" parent="." index="28" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.06885, 1.56327, 8.53321)
+
+[node name="Crate14" parent="." index="29" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.47075, 3.27809, 11.067)
+
+[node name="Crate15" parent="." index="30" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17315, 3.27809, 10.4822)
+
+[node name="Crate16" parent="." index="31" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1698, 1.14192, 8.45192)
+
+[node name="Crate17" parent="." index="32" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1698, 2.40091, 8.45192)
+
+[node name="Crate18" parent="." index="33" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.78, 1.20017, 7.07644)
+
+[node name="Crate19" parent="." index="34" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1814, 1.20017, 9.60974)
+
+[node name="Crate20" parent="." index="35" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8838, 1.20017, 9.02491)
+
+[node name="Corpse" parent="." index="36" instance=ExtResource("7_qnmif")]
+transform = Transform3D(-0.0881815, 0, 0.996104, 0, 1, 0, -0.996104, 0, -0.0881815, -24.5105, -0.024571, 0)
+
+[node name="NormalsDecals" type="Node3D" parent="." index="37"]
+
+[node name="NormalSploot" parent="NormalsDecals" index="0" instance=ExtResource("8_c04v7")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -24.7181, 0.272681, -0.0437753)
+size = Vector3(2, 0.14447, 2.05811)
+
+[node name="NormalSploot4" parent="NormalsDecals" index="1" instance=ExtResource("8_c04v7")]
+transform = Transform3D(-0.99969, 0, 0.0248859, 0, 1, 0, -0.0248859, 0, -0.99969, -23.7353, -0.0434827, -0.0519541)
+size = Vector3(2.6001, 0.14447, 2.07446)
+
+[node name="NormalSploot2" parent="NormalsDecals" index="2" instance=ExtResource("8_c04v7")]
+transform = Transform3D(0.457369, 0.534019, 0.711082, -0.79368, 0.605794, 0.0555478, -0.401106, -0.589777, 0.700912, -19.7339, 0.173051, 5.56865)
+size = Vector3(2, 2.67761, 2.05811)
+
+[node name="NormalSploot3" parent="NormalsDecals" index="3" instance=ExtResource("8_c04v7")]
+transform = Transform3D(0.330693, -0.943332, -0.0276883, 0.915456, 0.313516, 0.252286, -0.229308, -0.108776, 0.967256, -15.8577, 0.740609, -1.804)
+size = Vector3(1.79248, 2.16577, 1)
 
 [connection signal="VisionChanged" from="PerspectiveMonster" to="." method="_on_perspective_monster_vision_changed"]
+[connection signal="KeyCardGrabbed" from="Corpse/KeyCard" to="." method="_on_key_card_key_card_grabbed"]
+
+[editable path="Corpse"]
+[editable path="Corpse/Dead_guard_model"]
