@@ -7,6 +7,7 @@
 script = ExtResource("1_ialj2")
 
 [node name="Camera" type="Camera3D" parent="."]
+current = true
 
 [node name="PauseMenu" parent="Camera" instance=ExtResource("2_v2r5y")]
 visible = false

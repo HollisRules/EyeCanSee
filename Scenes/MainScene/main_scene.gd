@@ -72,3 +72,7 @@ func _on_perspective_monster_vision_changed(ItSeesHim: bool) -> void:
 
 func _on_key_card_key_card_grabbed() -> void:
 	KeyCardGrabbed = true
+
+
+func _on_perspective_monster_killed_player() -> void:
+	pass # Replace with function body.

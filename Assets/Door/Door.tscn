@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://0w04idln1xgn"]
+[gd_scene load_steps=9 format=3 uid="uid://0w04idln1xgn"]
 
 [ext_resource type="Script" path="res://Assets/Door/door.gd" id="1_nfhu0"]
 [ext_resource type="Texture2D" uid="uid://bhxmm5lcaju07" path="res://Textures/Door.png" id="2_p08y4"]
 [ext_resource type="FontFile" uid="uid://q1vbmciv7j6g" path="res://Font/impact.ttf" id="3_5ws01"]
 [ext_resource type="PackedScene" uid="uid://bnw3bjufbnl5l" path="res://Assets/KeyCardReader/key_card_reader.tscn" id="3_yk8yh"]
+[ext_resource type="AudioStream" uid="uid://cus7k80c8bo1h" path="res://Sounds/Door movement.wav" id="4_81876"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7fm8x"]
 size = Vector3(2.1, 4, 0.25)
@@ -51,7 +52,8 @@ font = ExtResource("3_5ws01")
 font_size = 64
 outline_size = 0
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnimatableBody3D"]
+[node name="DoorAudio" type="AudioStreamPlayer3D" parent="AnimatableBody3D"]
+stream = ExtResource("4_81876")
 
 [node name="KeyCardReader" parent="." instance=ExtResource("3_yk8yh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64362, 1.56318, 0.289616)

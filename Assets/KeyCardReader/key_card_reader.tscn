@@ -38,3 +38,6 @@ mesh = SubResource("SphereMesh_50oxu")
 
 [node name="BeepAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_4q8e5")
+volume_db = -27.018
+max_db = 1.0
+pitch_scale = 1.49

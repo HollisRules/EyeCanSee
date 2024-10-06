@@ -4,6 +4,7 @@ signal KeyCardGrabbed
 func Interact() -> void:
 	super()
 	emit_signal("KeyCardGrabbed")
+	visible = false
 	$IFoundKeyCard.play()
 
 

@@ -1,0 +1,273 @@
+[gd_scene load_steps=17 format=3 uid="uid://d4d0cgdkwonio"]
+
+[ext_resource type="PackedScene" uid="uid://db0xqahnf4gsr" path="res://Scenes/Player/Player_death_animation_model.fbx" id="1_5occb"]
+[ext_resource type="Script" path="res://Scenes/DeathScene/death_scene.gd" id="1_uc8xn"]
+[ext_resource type="Texture2D" uid="uid://b12e6mf2u68at" path="res://Textures/PlayerTexture.png" id="2_50rel"]
+[ext_resource type="AudioStream" uid="uid://caiwa43bnoo3n" path="res://Sounds/no.wav" id="3_ylcag"]
+[ext_resource type="AudioStream" uid="uid://cfuh0suywm76x" path="res://Sounds/Scream.wav" id="4_kornu"]
+[ext_resource type="PackedScene" uid="uid://dwww5x3tpohl" path="res://Scenes/Buttons/restart_button.tscn" id="6_jsf75"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2u6lm"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_guyip"]
+sky_material = SubResource("ProceduralSkyMaterial_2u6lm")
+
+[sub_resource type="Environment" id="Environment_nucdr"]
+background_mode = 2
+sky = SubResource("Sky_guyip")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfux5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jufdj"]
+radius = 0.25
+
+[sub_resource type="Animation" id="Animation_kvu1r"]
+resource_name = "DeathAnimation"
+length = 2.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player_death_animation_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.866667, 1.36667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.74533, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player_death_animation_model/Skeleton3D/BoneAttachment3D/NOOO:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "animation"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player_death_animation_model/AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": PackedStringArray("Take 001"),
+"times": PackedFloat32Array(0.833333)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player_death_animation_model/Skeleton3D/BoneAttachment3D/DeathScream:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.166667, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.933333, 1.33333, 2.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.82757, 3.40855), Vector3(0, 2.32873, 2.83733), Vector3(0, 2.064, 1.52285), Vector3(0, 2.049, 0.273)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.933333, 1.33333, 2.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.364687, 0, 0), Vector3(-0.233874, 0, 0), Vector3(-0.111701, 0, 0), Vector3(-0.678933, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bbkbm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player_death_animation_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player_death_animation_model/Skeleton3D/BoneAttachment3D/NOOO:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player_death_animation_model/Skeleton3D/BoneAttachment3D/DeathScream:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.82757, 3.40855)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.364687, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16fql"]
+_data = {
+"DeathAnimation": SubResource("Animation_kvu1r"),
+"RESET": SubResource("Animation_bbkbm")
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r7xne"]
+size = Vector2(5000, 5000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tp6hy"]
+albedo_texture = ExtResource("2_50rel")
+
+[node name="DeathScene" type="Node3D"]
+script = ExtResource("1_uc8xn")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.96802, 0)
+shadow_enabled = true
+spot_range = 10.0963
+spot_angle = 24.208
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nucdr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.934236, 0.356656, 0, -0.356656, 0.934236, 0, 2.82757, 3.40855)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.777322, 0.629103, 0, -0.629103, 0.777322, 0, -0.0181019, 0.868428)
+material_override = SubResource("StandardMaterial3D_nfux5")
+mesh = SubResource("CapsuleMesh_jufdj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D"]
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.025
+omni_range = 0.914
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_16fql")
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_r7xne")
+
+[node name="Player_death_animation_model" parent="." instance=ExtResource("1_5occb")]
+transform = Transform3D(0.29, 0, 0, 0, 0.29, 0, 0, 0, 0.29, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Player_death_animation_model" index="0"]
+bones/2/rotation = Quaternion(-0.0297255, -0.0441745, 0.367804, 0.928378)
+bones/4/rotation = Quaternion(-0.526717, 0.674274, 0.0468478, 0.51549)
+bones/5/rotation = Quaternion(-0.0647184, 0.0344977, -0.880083, 0.469122)
+bones/6/rotation = Quaternion(6.20385e-25, 0.356159, 4.65289e-25, 0.934425)
+bones/7/rotation = Quaternion(0.859036, -0.274506, 0.137453, 0.409646)
+bones/8/position = Vector3(140.407, 0.0677955, -0.0478676)
+bones/8/rotation = Quaternion(0.559118, -0.616128, 0.554771, 0.00145092)
+
+[node name="Main_Model_for_animations" parent="Player_death_animation_model/Skeleton3D" index="0"]
+material_override = SubResource("StandardMaterial3D_tp6hy")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Player_death_animation_model/Skeleton3D" index="1"]
+transform = Transform3D(0.000596915, -0.000872537, 0.00994396, 0.00725576, -0.00680352, -0.00103253, 0.00685549, 0.00727673, 0.000226979, 0.0701248, 6.3825, 0.835075)
+bone_name = "head_tip"
+bone_idx = 3
+
+[node name="NOOO" type="AudioStreamPlayer3D" parent="Player_death_animation_model/Skeleton3D/BoneAttachment3D"]
+stream = ExtResource("3_ylcag")
+
+[node name="DeathScream" type="AudioStreamPlayer3D" parent="Player_death_animation_model/Skeleton3D/BoneAttachment3D"]
+stream = ExtResource("4_kornu")
+
+[node name="main_grp" parent="Player_death_animation_model" index="1"]
+transform = Transform3D(1.91069e-17, 4.37114e-10, -0.01, 0.01, -4.37114e-10, 0, -4.37114e-10, -0.01, -4.37114e-10, 4.93038e-32, 4.10062, 0)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" parent="Control/VBoxContainer" instance=ExtResource("6_jsf75")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[editable path="Player_death_animation_model"]

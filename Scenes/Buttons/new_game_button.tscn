@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://d21kcnmish28g"]
+[gd_scene load_steps=3 format=3 uid="uid://d21kcnmish28g"]
 
 [ext_resource type="Script" path="res://Scenes/Buttons/new_game_button.gd" id="1_7os4c"]
+[ext_resource type="Theme" uid="uid://64eykjmfoxai" path="res://Theme/EyeTheme.tres" id="1_jid0q"]
 
 [node name="NewGameButton" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_jid0q")
 text = "Start Game"
 script = ExtResource("1_7os4c")
 

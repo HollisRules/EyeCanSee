@@ -45,6 +45,8 @@ class_name RigidCharacterBody3D
 @export var drag_force: float = 0.1
 ## The density of the fluid the body is moving in. By default it's set to the density of air.
 @export var fluid_density: float = 1.293
+##Whether input vector is global or not
+@export var isInputGlobal : bool = false
 
 
 var is_on_floor: bool
@@ -132,9 +134,13 @@ func apply_movement(delta: float):
 			#apply_central_impulse(new_norma * jump_force)
 	if Input.is_action_just_pressed("run") and is_on_floor:
 		is_running = true
-	var forward = floor_normal.cross(orientation_node.global_basis.x)
-	var right = forward.cross(floor_normal)
-	var dir = ((forward * input_direction.y) + (right * input_direction.x)).normalized()
+	var dir
+	if !isInputGlobal:
+		var forward = floor_normal.cross(orientation_node.global_basis.x)
+		var right = forward.cross(floor_normal)
+		dir = ((forward * input_direction.y) + (right * input_direction.x)).normalized()
+	else:
+		dir = Vector3(input_direction.x, 0 ,input_direction.y)
 	if dir:
 		var move_forc = air_force if not is_on_floor else run_force if is_running else walk_force
 		apply_central_impulse(dir * move_forc * delta)

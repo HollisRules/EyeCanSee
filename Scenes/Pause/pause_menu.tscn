@@ -24,7 +24,6 @@ grow_vertical = 2
 
 [node name="RestartButton" parent="VBoxContainer" instance=ExtResource("2_i5ghx")]
 layout_mode = 2
-stretch_mode = 5
 
 [node name="ExitButton" parent="VBoxContainer" instance=ExtResource("4_gc4ur")]
 layout_mode = 2
