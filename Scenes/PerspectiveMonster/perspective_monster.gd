@@ -8,31 +8,28 @@ signal VisionChanged (ItSeesHim : bool)
 ##Ref To Main Scene
 @export var mainScene : MainScene = null
 
-##Ref to sight ray
-@onready var SightRay : RayCast3D = $HeadPOS/SightRay
+##Ref to camera
+@onready var Camera : Camera3D = $MonsterCamera
 
-##Ref to HeadPOS
-@onready var HeadPOSRef : HeadPOS = $HeadPOS
+##Ref to sight ray
+@onready var SightRay : RayCast3D = $SightRay
 
 var ItSeesHim : bool = false
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	SightRay.target_position = SightRay.to_local(playerRef.HeadPOSRef.global_position)
+	Camera.look_at(playerRef.global_position)
+	SightRay.target_position = SightRay.to_local(playerRef.Camera.global_position)
 	DoesItSee()
 			
 
 func DoesItSee():
 	if SightRay.is_colliding():
-		if !ItSeesHim and SightRay.get_collider() is Player:
-			ItSeesHim = true
-			VisionChanged.emit(ItSeesHim)
-		elif ItSeesHim and SightRay.get_collider() is Player:
-			ItSeesHim = true
+		if SightRay.get_collider() == playerRef:
+			if !ItSeesHim:
+				ItSeesHim = true
+				VisionChanged.emit(ItSeesHim)
 		else:
-			ItSeesHim = false
-			VisionChanged.emit(ItSeesHim)
-	else:
-		ItSeesHim = false
-		VisionChanged.emit(ItSeesHim)
-	print(ItSeesHim)
+			if ItSeesHim:
+				ItSeesHim = false
+				VisionChanged.emit(ItSeesHim)

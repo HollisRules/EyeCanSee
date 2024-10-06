@@ -141,13 +141,10 @@ func GetFloorVeloc() -> Vector3:
 		return Vector3.ZERO
 	match FloorObject.get_class():
 		"StaticBody3D":
-			print("Static")
 			return Vector3.ZERO
 		"RigidBody3D":
-			print("Rigid")
 			return Vector3.ZERO
 		_:
-			print("SOmething Else")
 			return Vector3.ZERO
 
 ##Returns Head Position

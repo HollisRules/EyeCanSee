@@ -1,7 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://2c5auuu6qdrs"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_4p6vc"]
-[ext_resource type="PackedScene" uid="uid://cvymqve5tsw56" path="res://Scenes/HeadPOS/head_pos.tscn" id="2_6xgp2"]
+[ext_resource type="Script" path="res://Scenes/Player/int_cast.gd" id="2_2sffp"]
+[ext_resource type="PackedScene" uid="uid://dr5tgm4l3koqq" path="res://Scenes/Player/flash_light.tscn" id="2_c4m6y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_61t58"]
 radius = 0.25
@@ -25,20 +26,11 @@ height = 0.68
 radial_segments = 4
 rings = 4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3uqg7"]
-albedo_color = Color(0.23965, 0.682788, 1, 1)
-metallic = 1.0
-roughness = 0.0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8vsq5"]
-radius = 0.1
-height = 0.5
-radial_segments = 4
-rings = 4
+[sub_resource type="SphereShape3D" id="SphereShape3D_5orjh"]
 
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("orientation_node")]
 script = ExtResource("1_4p6vc")
-orientation_node = NodePath("HeadPOS")
+orientation_node = NodePath("PlayerCamera")
 
 [node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
@@ -59,10 +51,16 @@ material_override = SubResource("StandardMaterial3D_1brs1")
 mesh = SubResource("CapsuleMesh_enviv")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="TestMesh"]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.566, -0.205)
-material_override = SubResource("StandardMaterial3D_3uqg7")
-mesh = SubResource("CapsuleMesh_8vsq5")
-skeleton = NodePath("../..")
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76372, 0)
 
-[node name="HeadPOS" parent="." instance=ExtResource("2_6xgp2")]
+[node name="IntCast" type="ShapeCast3D" parent="PlayerCamera"]
+shape = SubResource("SphereShape3D_5orjh")
+target_position = Vector3(0, 0, -5)
+collision_mask = 27
+collide_with_areas = true
+script = ExtResource("2_2sffp")
+
+[node name="FlashLight" parent="." node_paths=PackedStringArray("IntCastRef") instance=ExtResource("2_c4m6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.104201, 1.36859, -0.200457)
+IntCastRef = NodePath("../PlayerCamera/IntCast")

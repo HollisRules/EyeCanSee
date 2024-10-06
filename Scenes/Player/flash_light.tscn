@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dr5tgm4l3koqq"]
+
+[ext_resource type="Script" path="res://Scenes/Player/flash_light.gd" id="1_whwef"]
+
+[sub_resource type="Gradient" id="Gradient_pdh8j"]
+offsets = PackedFloat32Array(0.581955, 0.880259, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.34902, 1, 1, 1, 0.74902)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hd6dw"]
+gradient = SubResource("Gradient_pdh8j")
+width = 1
+height = 128
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.512821, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xg02"]
+gradient = SubResource("Gradient_pdh8j")
+width = 1
+height = 128
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.512821, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jaf5"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0.027451)
+albedo_texture = SubResource("GradientTexture2D_hd6dw")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = SubResource("GradientTexture2D_6xg02")
+uv1_world_triplanar = true
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_di3a1"]
+material = SubResource("StandardMaterial3D_1jaf5")
+top_radius = 0.05
+bottom_radius = 1.5
+height = 3.0
+
+[node name="FlashLight" type="SpotLight3D"]
+spot_range = 10.0
+spot_angle = 27.2707
+script = ExtResource("1_whwef")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1.47719)
+mesh = SubResource("CylinderMesh_di3a1")

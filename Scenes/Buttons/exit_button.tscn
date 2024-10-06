@@ -1,10 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvrya2gkul5g0"]
+[gd_scene load_steps=3 format=3 uid="uid://cvrya2gkul5g0"]
 
 [ext_resource type="Script" path="res://Scenes/Buttons/exit_button.gd" id="1_u6373"]
+[ext_resource type="Texture2D" uid="uid://bvvi1ymupe451" path="res://Textures/eyequit.png" id="1_wj4m8"]
 
-[node name="ExitButton" type="Button"]
+[node name="ExitButton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Exit"
+texture_normal = ExtResource("1_wj4m8")
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("1_u6373")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

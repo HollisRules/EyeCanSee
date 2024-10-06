@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpwhntfauqp88"]
+
+[ext_resource type="Script" path="res://Scenes/Interactables/InteractabelRigidBody/inter_rigid_body.gd" id="1_waj5k"]
+
+[node name="InterRigidBody" type="RigidBody3D"]
+script = ExtResource("1_waj5k")

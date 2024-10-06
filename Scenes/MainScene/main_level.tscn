@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://di3qsuf7euu5"]
+[gd_scene load_steps=13 format=3 uid="uid://di3qsuf7euu5"]
 
 [ext_resource type="PackedScene" uid="uid://evr7qe017njt" path="res://Scenes/MainScene/main_scene.tscn" id="1_tnxgj"]
 [ext_resource type="PackedScene" uid="uid://by0kj2l4nj7o8" path="res://Scenes/PerspectiveMonster/perspective_monster.tscn" id="2_2kgns"]
 [ext_resource type="PackedScene" uid="uid://2c5auuu6qdrs" path="res://Scenes/Player/Player.tscn" id="3_lnc5a"]
+[ext_resource type="PackedScene" uid="uid://sk70fgtbhnh2" path="res://Assets/Crate/Crate.tscn" id="4_s6llo"]
+[ext_resource type="PackedScene" uid="uid://bnw3bjufbnl5l" path="res://Assets/KeyCardReader/key_card_reader.tscn" id="5_m3p8q"]
+[ext_resource type="PackedScene" uid="uid://dlat5nb432fov" path="res://Assets/KeyCardReader/key_card.tscn" id="6_6dngh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wc568"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -14,36 +17,77 @@ sky_material = SubResource("ProceduralSkyMaterial_wc568")
 [sub_resource type="Environment" id="Environment_si8rw"]
 background_mode = 2
 sky = SubResource("Sky_qgf4d")
+ambient_light_sky_contribution = 0.05
+ambient_light_energy = 0.05
 tonemap_mode = 2
 glow_enabled = true
+glow_blend_mode = 0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jp87c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5dcnx"]
+noise = SubResource("FastNoiseLite_jp87c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke1wv"]
+albedo_texture = SubResource("NoiseTexture2D_5dcnx")
+uv1_triplanar = true
 
 [node name="MainLevel" node_paths=PackedStringArray("PlayerRef", "MonstRef") instance=ExtResource("1_tnxgj")]
 PlayerRef = NodePath("Player")
 MonstRef = NodePath("PerspectiveMonster")
+TranMovementSpeed = 25.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="0"]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
 environment = SubResource("Environment_si8rw")
 
-[node name="MainCam" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80186, 1, 0)
-
-[node name="LevelCombiner" type="CSGCombiner3D" parent="." index="3"]
+[node name="LevelCombiner" type="CSGCombiner3D" parent="." index="2"]
+material_override = SubResource("StandardMaterial3D_ke1wv")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="LevelCombiner" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99526, -1.59251, -6.49156)
 size = Vector3(30.8649, 1, 24.7101)
 
-[node name="PerspectiveMonster" parent="." index="4" node_paths=PackedStringArray("playerRef", "mainScene") instance=ExtResource("2_2kgns")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40809, 0, 0)
+[node name="CSGBox3D2" type="CSGBox3D" parent="LevelCombiner" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62836, 1.54567, -11.21)
+size = Vector3(8.01575, 5.51257, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="LevelCombiner" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.66172, -0.658561, -10.3157)
+
+[node name="PerspectiveMonster" parent="." index="3" node_paths=PackedStringArray("playerRef", "mainScene") instance=ExtResource("2_2kgns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29373, -0.949931, -14.9908)
 playerRef = NodePath("../Player")
 mainScene = NodePath("..")
 
-[node name="Player" parent="." index="5" instance=ExtResource("3_lnc5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80186, 0, 0)
+[node name="Player" parent="." index="4" instance=ExtResource("3_lnc5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51391, 0, -4.3968)
+collision_mask = 31
+mass = 60.0
+TurnRate = 20.0
+ObjectForceMult = 100.0
+ObjectDampMult = 20.0
+jump_force = 350.0
+walk_force = 800.0
+run_force = 1000.0
+drag_force = 0.25
+
+[node name="Crate" parent="." index="5" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92091, -0.299183, -9.6267)
+mass = 10.0
+
+[node name="Crate2" parent="." index="6" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.66754, -0.299183, -8.81979)
+mass = 10.0
+
+[node name="Crate3" parent="." index="7" instance=ExtResource("4_s6llo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.44124, -0.299183, -9.22187)
+mass = 10.0
+
+[node name="KeyCardReader" parent="." index="8" instance=ExtResource("5_m3p8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.71898, 0.0955724, -10.6871)
+
+[node name="KeyCard" parent="." index="9" instance=ExtResource("6_6dngh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.47304, -0.133796, -10.0519)
 
 [connection signal="VisionChanged" from="PerspectiveMonster" to="." method="_on_perspective_monster_vision_changed"]

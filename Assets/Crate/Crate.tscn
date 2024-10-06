@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://sk70fgtbhnh2"]
+
+[ext_resource type="Script" path="res://Scenes/Interactables/InteractabelRigidBody/inter_rigid_body.gd" id="1_pmrg5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ve5ut"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_od3re"]
+
+[node name="Crate" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 31
+script = ExtResource("1_pmrg5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ve5ut")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_od3re")

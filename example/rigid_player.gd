@@ -53,7 +53,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-func process_character_input():
+func process_character_input(delta : float):
 	input_direction = Input.get_vector("move_left", "move_right", "move_backward", "move_forward")
 	jump_input = Input.is_action_just_pressed("jump")
 	run_input = Input.is_action_just_pressed("run")

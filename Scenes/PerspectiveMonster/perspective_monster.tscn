@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/PerspectiveMonster/perspective_monster.gd" id="1_0axm1"]
 [ext_resource type="Texture2D" uid="uid://cgy0tyfcc6rwh" path="res://Scenes/PerspectiveMonster/Monster.png" id="2_4sah7"]
-[ext_resource type="PackedScene" uid="uid://cvymqve5tsw56" path="res://Scenes/HeadPOS/head_pos.tscn" id="3_jseoh"]
+[ext_resource type="AudioStream" uid="uid://boe43dst24dsw" path="res://Sounds/HeartBeatLoop.wav" id="3_3jogs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtuys"]
 height = 2.75
@@ -27,9 +27,17 @@ pixel_size = 0.0008
 billboard = 2
 texture = ExtResource("2_4sah7")
 
-[node name="HeadPOS" parent="." instance=ExtResource("3_jseoh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68876, 0)
+[node name="MonsterCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.70568, 0)
 
-[node name="SightRay" type="RayCast3D" parent="HeadPOS"]
+[node name="SightRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68876, 0)
 target_position = Vector3(0, 0, 0)
 hit_back_faces = false
+
+[node name="HeartBeat" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04904, 0)
+stream = ExtResource("3_3jogs")
+attenuation_model = 1
+autoplay = true
+max_distance = 10.0

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwww5x3tpohl"]
+
+[ext_resource type="Script" path="res://Scenes/Buttons/restart_button.gd" id="1_bs2ly"]
+[ext_resource type="Texture2D" uid="uid://c6r4jc5s445ej" path="res://Textures/RestartI.png" id="1_nff52"]
+
+[node name="RestartButton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_nff52")
+ignore_texture_size = true
+stretch_mode = 3
+script = ExtResource("1_bs2ly")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

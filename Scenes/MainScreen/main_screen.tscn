@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://mqkfeovasq0g"]
 
 [ext_resource type="Script" path="res://Scenes/MainScreen/main_screen.gd" id="1_th7e6"]
-[ext_resource type="PackedScene" uid="uid://i3qjqowaq365" path="res://Scenes/Buttons/load_button.tscn" id="2_kjumo"]
+[ext_resource type="PackedScene" uid="uid://d21kcnmish28g" path="res://Scenes/Buttons/new_game_button.tscn" id="2_bakqk"]
 [ext_resource type="PackedScene" uid="uid://cvrya2gkul5g0" path="res://Scenes/Buttons/exit_button.tscn" id="3_70ln8"]
 
 [node name="MainScreen" type="Control"]
@@ -29,7 +29,7 @@ text = "Eye Can See You"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LoadButton" parent="VBoxContainer" instance=ExtResource("2_kjumo")]
+[node name="NewGameButton" parent="VBoxContainer" instance=ExtResource("2_bakqk")]
 layout_mode = 2
 
 [node name="ExitButton" parent="VBoxContainer" instance=ExtResource("3_70ln8")]

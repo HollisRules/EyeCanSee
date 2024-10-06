@@ -1,14 +1,11 @@
-@tool
 extends Node3D
 class_name MainScene
 
 ##Current camera mode monster or player
-@export var CamOnPlayer : bool = true:
-	set(value):
-		value = CamOnPlayer
-		MoveCamera()
-	get:
-		return CamOnPlayer
+var CamOnPlayer : bool = true
+
+##Current camera mode monster or player
+var FollowCam : bool = true
 
 ##Ref to player
 @export var PlayerRef : Player
@@ -16,30 +13,51 @@ class_name MainScene
 ##Ref to Monster
 @export var MonstRef : Monster
 
+##Camera Transition Speed m/s
+@export var TranMovementSpeed : float = 1
+
+##Transitioning Bool
+@export var Transitioning : bool = false
+
+
 ##Ref To Cam
-@onready var MainCam : Camera3D = $MainCam
+@onready var Camera : Camera3D = $Camera
+
+##Ref To PLayerCamera
+@onready var PlayerCam : Camera3D = PlayerRef.Camera
+
+##Ref To MonsterCamera
+@onready var MonstCam : Camera3D = MonstRef.Camera
+
+##Tween used for transitioning camera
+var tween : Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+
+func _ready() -> void:
+	Camera.global_transform = PlayerCam.global_transform
 
 func MoveCamera() -> void:
-	if CamOnPlayer:
-		print("OnPlay")
-		MainCam.global_position = PlayerRef.global_position
-		MainCam.global_position.y += 1
-	else:
-		print("OnMON")
-		MainCam.global_position = MonstRef.global_position
-		MainCam.global_position.y += 1
+	tween.kill()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	FollowCam = false
+	var GoalTrans : Transform3D = PlayerRef.Camera.global_transform if CamOnPlayer else MonstRef.Camera.global_transform
+	var TranDuration : float = Camera.global_position.distance_to(GoalTrans.origin) / TranMovementSpeed
+	tween.tween_property(Camera, "global_transform", GoalTrans, TranDuration)
+	await tween.finished
+	FollowCam = true
+	Transitioning = false
 
-func _physics_process(delta: float) -> void:
-	if CamOnPlayer:
-		MainCam.global_position = PlayerRef.global_position
-		MainCam.global_position.y += 1
-	else:
-		MainCam.global_position = MonstRef.global_position
-		MainCam.global_position.y += 1
-
+func _process(delta: float) -> void:
+	if Transitioning:
+		MoveCamera()
+	if FollowCam:
+		if CamOnPlayer:
+			Camera.global_transform = PlayerRef.Camera.global_transform
+		else:
+			Camera.global_transform = MonstRef.Camera.global_transform
 
 func _on_perspective_monster_vision_changed(ItSeesHim: bool) -> void:
 	if ItSeesHim:
-		CamOnPlayer = true
-	else:
 		CamOnPlayer = false
+	else:
+		CamOnPlayer = true
+	Transitioning = true
